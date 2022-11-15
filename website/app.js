@@ -10,7 +10,6 @@ const url = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 
 const myServer = 'http://localhost:5000';
 
-const valid = document.getElementById('unvalid');
 
 document.getElementById('generate').addEventListener('click', displayData = ()=> {
     const myZip = document.getElementById('zip').value;
@@ -18,16 +17,14 @@ document.getElementById('generate').addEventListener('click', displayData = ()=>
 
     dataofWeather(myZip).then((mydata) =>{
         if (mydata) {
-            // let temp = mydata.main.temp;
-            // let city = mydata.name;
-            // let weather = mydata.weather[0].description;
-        
-
-        let newdata = {
+          let {
+            main: { temp }, name: city, weather: [{ description }],} = mydata;
+    
+          let newdata = {
             newDate,
-            city:mydata.name,
-            temp: Math.round(mydata.main.temp), 
-            weather: mydata.weather[0].description,
+            city,
+            temp: Math.round(temp),
+            description,
             myFeelings,
           };
 
@@ -43,12 +40,12 @@ let dataofWeather = async (zip) =>{
         let resp = await fetch(url +zip+ apik);
         let mydata = await resp.json();
 
-        if (mydata.cod != 200) {
+       /* if (mydata.cod != 200) {
           // display the error message on UI
           valid.innerHTML = mydata.message;
-          setTimeout(_=> valid.innerHTML = '', 2000)
+          setTimeout(()=> valid.innerHTML = '', 2000)
           throw `${mydata.message}`;
-        }
+        }*/
     
         return mydata;
     } catch(error) {
@@ -64,10 +61,11 @@ const showdata = async (myurl='', newdata={}) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/josn',},
-      body: JSON.stringify(newdata)
+      body: JSON.stringify(newdata),
     });
     try{
         const datanew = await response.json();
+        console.log("saved", datanew);
         return datanew;
     }catch(error){
       console.log('error', error);
@@ -77,13 +75,13 @@ const showdata = async (myurl='', newdata={}) => {
     
     const request = await fetch(myServer + '/all');
     try {
-        const svdata = await request.json();
+        const data = await request.json();
     
-        document.getElementById("date").innerHTML = svdata.newDate;
-        document.getElementById("city").innerHTML = svdata.city;
-        document.getElementById("temp").innerHTML = svdata.temp + '&degC';
-        document.getElementById("weather").innerHTML = svdata.weather;
-        document.getElementById("content").innerHTML = svdata.feelings;
+        document.getElementById("date").innerHTML = data.newDate;
+        document.getElementById("city").innerHTML = data.city;
+        document.getElementById("temp").innerHTML = data.temp + '&degC';
+        document.getElementById("weather").innerHTML = data.description;
+        document.getElementById("content").innerHTML = data.feelings;
       } catch (error) {
       console.log('error', error);
     }
