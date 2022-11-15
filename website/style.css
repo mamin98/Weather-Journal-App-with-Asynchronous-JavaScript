@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    background-image: url(./weather2.jpg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .headline{
+    padding: 10px;
+    text-align: center;
+    font-size: 35px;
+    background-color: whitesmoke;
+    color: teal;
+  }
+  
+  #zip,
+  #feelings,
+  #generate{
+    display: block;
+    margin: 50px auto;
+    height: 40px;
+
+    background: #ccdbd8a4;
+    color: gold;
+    
+    border-radius: 19px;
+    text-align: center;
+    padding: 5px;
+
+    border: none;
+    outline: none;
+  }
+  
+  #zip::placeholder,
+  #feelings::placeholder{
+    color: #0ff0f5;
+    font-size: 20px;
+    font-family: sans-serif;
+    text-align: center;
+    padding-top: 5px;
+  }
+
+  #unvalid {
+    background-color: #bd0b0b;
+    color: white;
+    font-size: large;
+    width: 22%;
+    text-align: center;
+    margin: 0px auto 12px;
+    border-radius: 1px 0px 30px 30px;
+    display: block;
+  }
+
+  #generate{
+    width: 20%;
+    margin-top: 15px;
+    font-size: 20px;
+    background: teal;
+    cursor: pointer;
+  }
+  
+  .myholder{
+    width: 50%;
+    background: #c4d8a4;
+    margin: 50px auto;
+    border-radius: 11px;
+    height: 200px;
+    opacity: 0;
+    transition: all 2s ease; 
+  }
+
+  .title{
+    padding: 10px;
+    text-align: center;
+    font-size: 17px;
+  }
+
+  #entryHolder{
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-template-rows: 60%;
+    grid-template-columns: 50% 50%;
+    font-size: 1.5vw;
+  }
+  #content{
+    grid-column: 1 / -1;
+  }
+  #temp,
+  #city{
+    font-size: 4vw;
+  }
